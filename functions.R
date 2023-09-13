@@ -35,8 +35,8 @@ plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL)
   
   #set colors for pearson
   colors <- c(seq(-1,1,by=0.01))
-  my_palette <- c(blue,colorRampPalette(colors = c(blue, white, red))
-                  (n = length(colors)-3), red)
+  my_palette <- c("blue",colorRampPalette(colors = c("blue", "white", "red"))
+                  (n = length(colors)-3), "red")
   
   
   print_tab(plt = 
