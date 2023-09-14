@@ -1,5 +1,5 @@
 require(print.rmd.tabs)
-
+require(RColorBrewer)
 #' @title plot_genes_cor
 #' @description plot geneIds genes correlation heatmap, cut into k clusters or h height
 #' @param dataset seurat
