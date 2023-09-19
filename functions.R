@@ -1,5 +1,5 @@
 require(print.rmd.tabs)
-require(RColorBrewer)
+
 #' @title plot_genes_cor
 #' @description plot geneIds genes correlation heatmap, cut into k clusters or h height
 #' @param dataset seurat
@@ -9,7 +9,7 @@ require(RColorBrewer)
 #' @return df of genes as row names, and cluster in col 1
 #' @export 
 
-plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,show_rownames = F) {
+plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL) {
   #extract expression
   geneIds = intersect(geneIds,rownames(dataset))
   hallmars_exp = FetchData(object = dataset,vars = c(geneIds))
@@ -19,7 +19,7 @@ plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,
   
   # make annotations
   clustering_distance = "euclidean"
-  if(!is.null(num_of_clusters)){
+  if(!is_null(num_of_clusters)){
     annotation = as.data.frame(cutree(pht1[["tree_row"]], k = num_of_clusters)) #split into k clusters
   }else{
     annotation = as.data.frame(cutree(pht1[["tree_row"]], h = height)) #split into k clusters
@@ -35,12 +35,12 @@ plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,
   
   #set colors for pearson
   colors <- c(seq(-1,1,by=0.01))
-  my_palette <- c("blue",colorRampPalette(colors = c("blue", "white", "red"))
-                  (n = length(colors)-3), "red")
+  my_palette <- c(blue,colorRampPalette(colors = c(blue, white, red))
+                  (n = length(colors)-3), red)
   
   
   print_tab(plt = 
-              pheatmap(mat = hallmark_cor,annotation_col =  annotation, annotation_colors = annotation_colors, clustering_distance_rows = clustering_distance,clustering_distance_cols = clustering_distance,color = my_palette,breaks = colors,show_rownames = show_rownames,show_colnames = F)
+              pheatmap(mat = hallmark_cor,annotation_col =  annotation, annotation_colors = annotation_colors, clustering_distance_rows = clustering_distance,clustering_distance_cols = clustering_distance,color = my_palette,breaks = colors,show_rownames = F,show_colnames = F)
             ,title = "genes expression heatmap")
   return(annotation)
 }
