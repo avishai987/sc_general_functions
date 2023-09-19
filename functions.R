@@ -9,7 +9,7 @@ require(print.rmd.tabs)
 #' @return df of genes as row names, and cluster in col 1
 #' @export 
 
-plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,title = "genes expression heatmap") {
+plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,title = "genes expression heatmap",show_rownames = F) {
   #extract expression
   geneIds = intersect(geneIds,rownames(dataset))
   hallmars_exp = FetchData(object = dataset,vars = c(geneIds))
@@ -40,7 +40,7 @@ plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,
   
   
   print_tab(plt = 
-              pheatmap(mat = hallmark_cor,annotation_col =  annotation, annotation_colors = annotation_colors, clustering_distance_rows = clustering_distance,clustering_distance_cols = clustering_distance,color = my_palette,breaks = colors,show_rownames = F,show_colnames = F)
+              pheatmap(mat = hallmark_cor,annotation_col =  annotation, annotation_colors = annotation_colors, clustering_distance_rows = clustering_distance,clustering_distance_cols = clustering_distance,color = my_palette,breaks = colors,show_rownames = show_rownames,show_colnames = F)
             ,title = title)
   return(annotation)
 }
