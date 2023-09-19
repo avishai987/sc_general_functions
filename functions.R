@@ -1,15 +1,15 @@
 require(print.rmd.tabs)
-
+require(RColorBrewer)
 #' @title plot_genes_cor
 #' @description plot geneIds genes correlation heatmap, cut into k clusters or h height
 #' @param dataset seurat
 #' @param geneIds vector of gene names
-  #' @param height height to cut dendrogram, Default: 3
+#' @param height height to cut dendrogram, Default: 3
 #' @param num_of_clusters number of clusters to cut, Default: NULL
 #' @return df of genes as row names, and cluster in col 1
 #' @export 
 
-plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,title = "genes expression heatmap",show_rownames = F) {
+plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,show_rownames = F,title = "genes expression heatmap") {
   #extract expression
   geneIds = intersect(geneIds,rownames(dataset))
   hallmars_exp = FetchData(object = dataset,vars = c(geneIds))
@@ -35,8 +35,8 @@ plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,
   
   #set colors for pearson
   colors <- c(seq(-1,1,by=0.01))
-  my_palette <- c(blue,colorRampPalette(colors = c(blue, white, red))
-                  (n = length(colors)-3), red)
+  my_palette <- c("blue",colorRampPalette(colors = c("blue", "white", "red"))
+                  (n = length(colors)-3), "red")
   
   
   print_tab(plt = 
@@ -45,7 +45,7 @@ plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,
   return(annotation)
 }
 
-  
+
 # make a heatmap from  pvalues dataframe
 sig_heatmap <- function(all_patients_result, title,clustering_distance =  "euclidean", annotation = NULL, silent = F) {
   my_fun <- function(p) {                     
