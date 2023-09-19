@@ -19,7 +19,7 @@ plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,
   
   # make annotations
   clustering_distance = "euclidean"
-  if(!is_null(num_of_clusters)){
+  if(!is.null(num_of_clusters)){
     annotation = as.data.frame(cutree(pht1[["tree_row"]], k = num_of_clusters)) #split into k clusters
   }else{
     annotation = as.data.frame(cutree(pht1[["tree_row"]], h = height)) #split into k clusters
