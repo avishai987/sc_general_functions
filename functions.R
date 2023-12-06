@@ -63,7 +63,7 @@ sig_heatmap <- function(all_patients_result, title,clustering_distance =  "eucli
   
   
   
-  all_patients_result = -log(all_patients_result)
+  all_patients_result = -log10(all_patients_result)
   if(!is.null(sign_matrix)){
     sign_matrix = sign_matrix[,colnames(all_patients_result)]
     all_patients_result = all_patients_result * sign_matrix
