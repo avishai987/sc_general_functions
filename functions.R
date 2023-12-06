@@ -47,7 +47,8 @@ plot_genes_cor <- function(dataset, geneIds, height = 3, num_of_clusters = NULL,
 
 
 # make a heatmap from  pvalues dataframe
-sig_heatmap <- function(all_patients_result, title,clustering_distance =  "euclidean", annotation = NULL, silent = F) {
+# sign_matrix: matirx same size as all_patients_result, indicative for positive ot negative log(FoldChange)
+sig_heatmap <- function(all_patients_result, title,clustering_distance =  "euclidean", annotation = NULL, silent = F, sign_matrix = NULL) {
   my_fun <- function(p) {                     
     asterisks_vec = p
     # p = c(0.001, 0.01, 0.05,3.314507e-15)
@@ -64,6 +65,9 @@ sig_heatmap <- function(all_patients_result, title,clustering_distance =  "eucli
   
   all_patients_result = -log(all_patients_result)
   all_patients_result[all_patients_result>35] = 35
+  if(!is.null(sign_matrix)){
+    all_patients_result = all_patients_result * sign_matrix
+  }
   paletteFunc <- colorRampPalette(c("white","navy"));
   
   palette <- paletteFunc(100)
