@@ -1,5 +1,10 @@
 require(print.rmd.tabs)
 require(RColorBrewer)
+
+min_max_normalize <- function(x, na.rm = TRUE) {
+  return((x- min(x)) /(max(x)-min(x)))
+}
+
 #' @title plot_genes_cor
 #' @description plot geneIds genes correlation heatmap, cut into k clusters or h height
 #' @param dataset seurat
